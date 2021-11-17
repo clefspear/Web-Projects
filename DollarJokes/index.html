@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html>
+     <head>
+          <link rel="stylesheet" href="style.css">
+          <link rel="SHORTCUT ICON" type="image/x-icon" href="./favicon.ico">
+     </head>
+     <style>
+      h1 {text-align: center;}
+      p {text-align: center;}
+     </style>
+     <div id="header">
+          <h1>Welcome to Dollar Jokes</h1>
+          <p>Simply Pay $1 and you will get a Meme emailed right to you!</p>
+          <script src="script.js"></script>
+          <script src="https://www.paypal.com/sdk/js?client-id=AQGvezgcLydriaFm3JmUwLzPOZ8TYVftjKXw7AzxX6hqBQAK4R0x4JDMIUqxWyRS_2Xgx1rMCCFn2rel&currency=USD" data-sdk-integration-source="button-factory"></script>
+     </div>
+     <script>
+        paypal.Buttons({
+            style: {
+                shape: 'rect',
+                color: 'silver',
+                layout: 'vertical',
+                label: 'buynow',
+                
+            },
+            createOrder: function(data, actions) {
+                return actions.order.create({
+                    purchase_units: [{
+                        amount: {
+                            value: '1'
+                        }
+                    }]
+                });
+            },
+            onApprove: function(data, actions) {
+                return actions.order.capture().then(function(details) {
+                    alert('Transaction completed by ' + details.payer.name.given_name + '!');
+                });
+            }
+        }).render('#paypal-button-container');
+      </script>
+     
+     <div id='thebutton' class="thebutton">
+               <div class="wrapper">
+                   <div class="button" onclick="document.body.classList.add('active')">
+                       <span class="button-text">Pay and Recieve Meme</span>
+                       <div class="button-backgrounds">
+                           <div class="button-circle button-circle1"></div>
+                           <div class="button-circle button-circle2"></div>
+                           <div class="button-circle button-circle3"></div>
+                           <div class="button-circle button-circle4"></div>
+                       </div>
+                   </div>
+               </div>
+               <div class="wrapper">
+                   <div class="popup">
+                       <div class="popup-inside">
+                           <div class="backgrounds">
+                               <div class="background"></div>
+                               <div class="background background2"></div>
+                               <div class="background background3"></div>
+                               <div class="background background4"></div>
+                               <div class="background background5"></div>
+                               <div class="background background6"></div>
+                           </div>
+                       </div>
+                       <div class="content">
+                           <div class="content-wrapper">
+                               <h1>Thank You for Your Purchase!</h1>
+                               <div id="paypal-button-container" onclick="myFunction()"></div>
+                               <p>Check your email and your Meme should arrive within 24 hours!</p>
+                           </div>
+                       </div>
+                   </div>
+               </div>
+     </div>
+     <div id="bottom">
+       Created By: Peter Azmy. <br>
+       Purchase at own risk of recieving Meme. <br>
+       Please email any disputes to peterazmy8991@gmail.com. <br>
+      </div>
+
+</html>
+
+
+
+
